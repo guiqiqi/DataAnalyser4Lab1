@@ -18,7 +18,7 @@ class Tools(object):
 		# Draw the bar
 		figure = plt.figure(dpi = 360, facecolor = "white")
 		axes = plt.subplot(111)
-		axes.bar(x, y, width = 0.2)
+		axes.bar(x, y, width = 0.1)
 		axes.set_xticks(x)
 		axes.set_yticks(y)
 
