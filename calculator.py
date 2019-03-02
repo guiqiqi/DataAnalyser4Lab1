@@ -8,6 +8,7 @@ class Calculate(object):
 		"""init for iterators"""
 		self.standard = standard
 		self.datas = datas
+		self._average = self.average()
 
 	def reset(self):
 		new_iterator = Calculate(self.standard, self.datas)
@@ -34,12 +35,12 @@ class Calculate(object):
 
 	def difference(self):
 		for item in self.datas:
-			yield self.round(item - self.standard)
+			yield self.round(item - self._average)
 		return
 
 	def variance(self):
 		for item in self.datas:
-			yield self.round((item - self.standard) ** 2)
+			yield self.round((item - self._average) ** 2)
 		return
 
 	def rho(self):
