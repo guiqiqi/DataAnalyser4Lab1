@@ -1,6 +1,10 @@
 # DataAnalyser4Lab1
 Data analysis program for PE1
 
+## Operating environment
+Python3.x - https://www.python.org/ftp/python/3.7.2/python-3.7.2.exe
+Windows xp ++
+
 ## Data Format
 Save the data to a file in the following format:
 6.23 6.11 5.89 5.97 ...
