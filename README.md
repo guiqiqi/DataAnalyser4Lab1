@@ -7,7 +7,7 @@ Python3.x - https://www.python.org/ftp/python/3.7.2/python-3.7.2.exe
 Windows xp ++
 
 ## Prepare using
-  1. Download python 3.x from link above
+  1. Download and python 3.x from link above (if you have not installed before)
   2. Using command tool(cmd) to run command: `pip install matplotlib`
   3. Open `main.pyw` and follow the instructions
 
