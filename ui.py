@@ -2,7 +2,10 @@
 
 from consts import *
 
-_exit = lambda : root.destroy()
+def _exit():
+	root.destroy()
+	sys.exit()
+
 _select = lambda : _PATH.set(askopenfilename())
 open_fail = lambda: msgbox.showerror("Error", "Open file error!")
 invalid_value = lambda: msgbox.showerror("Error", "Invalid standard value!")
