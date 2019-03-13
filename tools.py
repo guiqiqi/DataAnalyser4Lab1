@@ -7,13 +7,15 @@ class Tools(object):
 		with open(TABLE, "w") as handler:
 			handler.write(table)
 
-	def drawbar(axis, datas, rho):
+	def drawbar(axis):
 		# Prepare for datas
+		_sum = sum(axis.values())
 		x, y = list(), list()
 		for splice, value in axis.items():
+			gap = splice[1] - splice[0]
 			calc_x = (splice[0] + splice[1]) / 2
 			x.append(round(calc_x, 3))
-			y.append(value)
+			y.append(value / gap / _sum)
 
 		# Draw the bar
 		figure = plt.figure(dpi = 360, facecolor = "white")
