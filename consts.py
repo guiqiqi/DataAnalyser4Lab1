@@ -12,7 +12,7 @@ import os
 
 ACCURACY = 10000 # default accuracy is 10**-5
 WIDTH = 12 # default width for every table column
-SEGMENT = 5 # default segments for operator linspace
+SEGMENT = 7 # default segments for operator linspace
 
 AXIS = "axis.png" # default axis figure filename
 BAR = "bar.png" # default bar figure filename
