@@ -9,6 +9,7 @@ import tkinter.messagebox as msgbox
 from tkinter.ttk import *
 
 import os
+import sys
 
 ACCURACY = 10000 # default accuracy is 10**-5
 WIDTH = 12 # default width for every table column
