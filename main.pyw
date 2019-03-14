@@ -30,10 +30,12 @@ def run(path, standard):
 	Tools.drawtable(table)
 
 	axis = instance.axis()
+	normal = instance.normal()
+
 	Tools.drawline(axis)
 
 	instance.reset()
-	Tools.drawbar(axis, instance.data(), instance.rho())
+	Tools.drawbar(axis, normal)
 
 	ui.success()
 	return
