@@ -7,24 +7,42 @@ class Tools(object):
 		with open(TABLE, "w") as handler:
 			handler.write(table)
 
-	def drawbar(axis):
+	def drawbar(axis, normal):
 		# Prepare for datas
 		_sum = sum(axis.values())
+		xtick = set()
 		x, y = list(), list()
 		for splice, value in axis.items():
 			gap = splice[1] - splice[0]
-			calc_x = (splice[0] + splice[1]) / 2
-			x.append(round(calc_x, 3))
+			xtick.add(splice[0])
+			xtick.add(splice[1])
+			x.append((splice[0] + splice[1]) / 2)
 			y.append(value / gap / _sum)
+		xtick = list(xtick); xtick.sort()
+		figure, axes = plt.subplots(dpi = 360, facecolor = "white")
 
 		# Draw the bar
-		figure = plt.figure(dpi = 360, facecolor = "white")
-		axes = plt.subplot(111)
-		axes.bar(x, y, width = 0.1)
-		axes.set_xticks(x)
-		axes.set_yticks(y)
+		axes_bar = axes
+		axes_bar.bar(x, y, width = gap,
+			facecolor = "blue", edgecolor = "yellow",
+			linestyle = '--', linewidth = 1, alpha = 0.6)
+		axes_bar.set_xticks(xtick)
 
+		# Add data annotations
+		for position, value in zip(x, y):
+			plt.text(position, value + 0.02, "%.2f" % value,
+				ha = "center", va = "bottom", fontsize = 7)
+
+		# Draw thee normal distribution
+		axes_normal = axes.twinx()
+		axes_normal.scatter(normal.keys(), normal.values(),
+			color = "red", alpha = 0.5)
+		# axes_normal.set_yticks([])
+
+		plt.ylim(0, max(y) + 0.3)
+		# plt.show()
 		plt.savefig(BAR)
+		plt.close(figure)
 
 	def drawline(axis):
 		# Prepare for datas
@@ -49,7 +67,9 @@ class Tools(object):
 			x_position = position[0]
 			axes.text(x_position + offset, 0.05, count, size = 10)
 
+		# plt.show()
 		plt.savefig(AXIS)
+		plt.close(figure)
 
 	def spliter(string):
 		string = string.strip()
@@ -68,7 +88,7 @@ class Tools(object):
 
 	def title():
 		titler = list()
-		titles = ["No.", "t", "t-<t>", "(t-<t>)^2", "rho"]
+		titles = ["No.", "t", "t-<t>", "(t-<t>)^2"]
 		divider = '-' * WIDTH * len(titles)
 		for title in titles:
 			titler.append(title.center(WIDTH))
