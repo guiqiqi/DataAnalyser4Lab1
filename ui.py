@@ -9,7 +9,7 @@ def _exit():
 _select = lambda : _PATH.set(askopenfilename())
 open_fail = lambda: msgbox.showerror("Error", "Open file error!")
 invalid_value = lambda: msgbox.showerror("Error", "Invalid standard value!")
-success = lambda: msgbox.showinfo("Success", "Analysis completed!")
+success = lambda: msgbox.showinfo("Success", "Analysis completed! \nNow exiting...")
 
 def notepad(file):
 	program = "notepad " if os.name == "nt" else "vi"
