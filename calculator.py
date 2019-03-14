@@ -43,20 +43,19 @@ class Calculate(object):
 			yield self.round((item - self._average) ** 2)
 		return
 
-	def rho(self):
-		sigma = self.sigma()
-		average = self.average()
-		for data in self.datas:
-			yield self.round(self._rho(sigma, average, data))
-		return
+	# def rho(self):
+	# 	sigma = self.sigma()
+	# 	average = self.average()
+	# 	for data in self.datas:
+	# 		yield self.round(self._rho(sigma, average, data))
+	# 	return
 
 	def iterators(self):
 		return [
 			self.index(),
 			self.data(),
 			self.difference(), 
-			self.variance(), 
-			self.rho()
+			self.variance()
 		]
 
 	def average(self):
@@ -78,23 +77,37 @@ class Calculate(object):
 			start, end = _min, self.round(_min + splice)
 			axis[(start, end)] = list()
 			_min = end
+
 		for data in self.datas:
 			for interval in axis.keys():
 				start, end = interval
 				if start <= data <= end:
 					axis[interval].append(data)
+					break
+			continue
+
 		return axis
 
 	def axis(self):
 		line = self.linspace()
 		return {key: len(datas) for key, datas in line.items()}
 
+	def normal(self):
+		line = self.linspace()
+		normal = dict()
+		sigma, average = self.sigma(), self.average()
+		for key, datas in line.items():
+			key = (key[0] + key[1]) / 2
+			rho = self.rho(sigma, average, key)
+			normal[key] = self.round(rho)
+		return normal
+
 	@staticmethod
 	def round(number, accuracy = ACCURACY):
 		return (round(number * accuracy) / accuracy)
 
 	@staticmethod
-	def _rho(sigma, average, data):
+	def rho(sigma, average, data):
 		_upi = 1 / (math.sqrt(2 * math.pi))
 		exponent = -1 * \
 		(data - average) ** 2 / (2 * sigma ** 2)
